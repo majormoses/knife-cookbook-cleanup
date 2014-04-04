@@ -32,18 +32,28 @@ class Chef
       def run
         all_cookbooks = rest.get_rest('/cookbooks?num_versions=all')
         drop_cookbooks = Hash.new
+        keep_cookbooks = Hash.new
         all_cookbooks.each do |cb|
           cookbook_name = cb[0]
-          discard_versions = cb[1]["versions"].map{ |v| v["version"] }.sort{ |x, y|Gem::Version.new(x) <=> Gem::Version.new(y) }.reverse.drop(1)
-          drop_cookbooks[cookbook_name] = discard_versions
+          sorted_versions = cb[1]["versions"].map{ |v| v["version"] }.sort{ |x, y|Gem::Version.new(x) <=> Gem::Version.new(y) }
+          keep_versions = sorted_versions.pop
+          dropped_versions = sorted_versions
+          drop_cookbooks[cookbook_name] = dropped_versions
+          keep_cookbooks[cookbook_name] = keep_versions
         end
-        drop_cookbooks.delete_if { |k,v|v.empty? }
+        keep_cookbooks.delete_if { |k, v|v.empty? }
+        drop_cookbooks.delete_if { |k, v|v.empty? }
 
         if drop_cookbooks.empty?
           ui.info "No old cookbook versions were found"
           exit 0
         end
 
+        ui.msg ""
+        ui.msg "The following cookbook versions will remain on the chef server:"
+        ui.msg ""
+        ui.msg ui.output(keep_cookbooks)
+        ui.msg ""
         ui.msg "The following cookbook versions will be deleted:"
         ui.msg ""
         ui.msg ui.output(drop_cookbooks)
