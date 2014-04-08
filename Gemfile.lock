@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    knife-cookbook-cleanup (0.1.1pre)
+    knife-cookbook-cleanup (0.1.1)
       chef (> 0.10.10)
 
 GEM
