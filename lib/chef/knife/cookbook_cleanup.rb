@@ -59,7 +59,9 @@ class Chef
         ui.msg ""
         ui.msg ui.output(drop_cookbooks)
         ui.msg ""
-        ui.confirm("Do you really want to delete these cookbooks? (Y/N) ", false)
+        unless config[:yes]
+          ui.confirm("Do you really want to delete these cookbooks? (Y/N) ", false)
+        end
 
         drop_cookbooks.each do |cookbook, versions|
           versions.each do |version|
