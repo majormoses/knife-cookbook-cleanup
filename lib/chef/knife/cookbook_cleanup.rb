@@ -24,6 +24,7 @@ class Chef
 
       deps do
         require 'chef/knife/bootstrap'
+        require 'chef/cookbook_version'
         Chef::Knife::Bootstrap.load_deps
       end
 

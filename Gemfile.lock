@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    knife-cookbook-cleanup (0.1.0)
+    knife-cookbook-cleanup (0.1.1pre)
       chef (> 0.10.10)
 
 GEM
@@ -35,7 +35,7 @@ GEM
     coderay (1.1.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    hashie (2.0.5)
+    hashie (2.1.0)
     highline (1.6.21)
     ipaddress (0.8.0)
     json (1.8.1)
