@@ -64,7 +64,7 @@ class Chef
         drop_cookbooks.each do |cookbook, versions|
           versions.each do |version|
             rest.delete_rest("cookbooks/#{cookbook}/#{version}")
-            ui.info("Deleted cookbook  #{cookbook.ljust(25)} [#{version}]")
+            ui.info("Deleted cookbook #{cookbook.ljust(25)} [#{version}]")
           end
         end
       end
