@@ -1,3 +1,4 @@
+
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 require "knife-cookbook-cleanup/version"
@@ -8,7 +9,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.has_rdoc = true
   s.extra_rdoc_files = ["README.md", "LICENSE" ]
-  s.authors     = ["Heavy Water Operations"]
+  s.authors     = ["Anthony Goddard","Fletcher Nichol","Heavy Water Operations"]
   s.email       = ["support@hw-ops.com"]
   s.homepage    = "https://github.com/heavywater/knife-cookbook-cleanup"
   s.summary     = %q{Chef Knife plugin to remove all cookbooks except the latest}
@@ -19,4 +20,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_dependency 'chef', '> 0.10.10'
+
+  s.add_development_dependency 'bundler', '~> 1.6'
+  s.add_development_dependency 'rake'
 end

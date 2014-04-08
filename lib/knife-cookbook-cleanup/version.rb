@@ -1,5 +1,5 @@
 module Knife
-  module Ghost
+  module CookbookCleanup
     VERSION = "0.1.0"
     MAJOR, MINOR, TINY = VERSION.split('.')
   end
