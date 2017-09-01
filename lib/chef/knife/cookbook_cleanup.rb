@@ -21,52 +21,66 @@ require 'chef/knife'
 class Chef
   class Knife
     class CookbookCleanup < Knife
-
       deps do
         require 'chef/knife/bootstrap'
         require 'chef/cookbook_version'
         Chef::Knife::Bootstrap.load_deps
       end
 
-      banner "knife cookbook cleanup"
+      banner 'knife cookbook cleanup'
+
+      option :versions_to_keep,
+             long: '--versions-to-keep VALUE',
+             description: 'Versions of cookbooks to keep (default 1)',
+             default: 1,
+             proc: proc(&:to_i)
+
+      option :dry_run,
+             long: '--dry-run',
+             description: 'Allows showing what would have been done without actually doing the deed',
+             boolean: true,
+             default: false
 
       def run
         all_cookbooks = rest.get_rest('/cookbooks?num_versions=all')
-        drop_cookbooks = Hash.new
-        keep_cookbooks = Hash.new
+        drop_cookbooks = {}
+        keep_cookbooks = {}
         all_cookbooks.each do |cb|
           cookbook_name = cb[0]
-          sorted_versions = cb[1]["versions"].map{ |v| v["version"] }.sort{ |x, y|Gem::Version.new(x) <=> Gem::Version.new(y) }
-          keep_versions = sorted_versions.pop
+          sorted_versions = cb[1]['versions'].map { |v| v['version'] }.sort { |x, y| Gem::Version.new(x) <=> Gem::Version.new(y) }
+          keep_versions = sorted_versions.pop(config[:versions_to_keep])
           dropped_versions = sorted_versions
           drop_cookbooks[cookbook_name] = dropped_versions
           keep_cookbooks[cookbook_name] = keep_versions
         end
-        keep_cookbooks.delete_if { |k, v|v.empty? }
-        drop_cookbooks.delete_if { |k, v|v.empty? }
+        keep_cookbooks.delete_if { |k, v| v.empty? }
+        drop_cookbooks.delete_if { |k, v| v.empty? }
 
         if drop_cookbooks.empty?
-          ui.info "No old cookbook versions were found"
+          ui.info 'No old cookbook versions were found'
           exit 0
         end
 
-        ui.msg ""
-        ui.msg "The following cookbook versions will remain on the chef server:"
-        ui.msg ""
+        ui.msg ''
+        ui.msg 'The following cookbook versions will remain on the chef server:'
+        ui.msg ''
         ui.msg ui.output(keep_cookbooks)
-        ui.msg ""
-        ui.msg "The following cookbook versions will be deleted:"
-        ui.msg ""
+        ui.msg ''
+        ui.msg 'The following cookbook versions will be deleted:'
+        ui.msg ''
         ui.msg ui.output(drop_cookbooks)
-        ui.msg ""
+        ui.msg ''
         unless config[:yes]
-          ui.confirm("Do you really want to delete these cookbooks? (Y/N) ", false)
+          ui.confirm('Do you really want to delete these cookbooks? (Y/N) ', false)
         end
-
         drop_cookbooks.each do |cookbook, versions|
           versions.each do |version|
-            rest.delete_rest("cookbooks/#{cookbook}/#{version}")
-            ui.info("Deleted cookbook #{cookbook.ljust(25)} [#{version}]")
+            if config[:dry_run]
+              ui.info("Would have deleted cookbook #{cookbook.ljust(25)} [#{version}]")
+            else
+              rest.delete_rest("cookbooks/#{cookbook}/#{version}")
+              ui.info("Deleted cookbook #{cookbook.ljust(25)} [#{version}]")
+            end
           end
         end
       end
