@@ -1,0 +1,33 @@
+language: ruby
+cache:
+- bundler
+before_install:
+  - gem install bundler -v 1.15
+
+install:
+  - bundle install
+rvm:
+  - 2.3.1
+  - 2.4.1
+notifications:
+  email:
+    recipients:
+      - me@benabrams.it
+    on_success: change
+    on_failure: always
+script:
+  - gem build knife-cookbook-cleanup.gemspec
+  - gem install knife-cookbook-cleanup-*.gem
+  - bundle exec rubocop -D
+
+# deploy:
+#   provider: rubygems
+#   api_key:
+#     secure: <encrypted rubygems deploy key>
+#   gem: knife-cookbook-cleanup
+#   on:
+#     tags: true
+#     all_branches: true
+#     rvm: 2.3.0
+#     rvm: 2.4.1
+#     repo: majormoses/knife-cookbook-cleanup
