@@ -1,1 +1,24 @@
-pkg/
+
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*.bundle
+*.so
+*.o
+*.a
+mkmf.log
+.vagrant/*
+.DS_Store
+.idea/*
+*.gem
+
+
+# test-kitchen
+.kitchen/
+.kitchen.list.yml

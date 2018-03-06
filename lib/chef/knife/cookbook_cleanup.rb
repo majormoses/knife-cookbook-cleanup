@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Author:: Heavy Water Operations (<support@hw-ops.com>)
 # Copyright:: Copyright (c) 2014 Heavy Water Operations, LLC.
@@ -53,8 +55,8 @@ class Chef
           drop_cookbooks[cookbook_name] = dropped_versions
           keep_cookbooks[cookbook_name] = keep_versions
         end
-        keep_cookbooks.delete_if { |k, v| v.empty? }
-        drop_cookbooks.delete_if { |k, v| v.empty? }
+        keep_cookbooks.delete_if { |_k, v| v.empty? }
+        drop_cookbooks.delete_if { |_k, v| v.empty? }
 
         if drop_cookbooks.empty?
           ui.info 'No old cookbook versions were found'
