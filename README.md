@@ -1,6 +1,6 @@
 knife-cookbook-cleanup
 ========
-A knife plugin for removing old versions of cookbooks from your chef-server, the plugin will only leave the latest versions of cookbooks on the server.
+A knife plugin for removing old versions of cookbooks from your chef-server, the plugin will by default only leave the latest versions of cookbooks on the server. You can control the number of versions that are left on the chef server.
 
 
 Installing knife-cookbook-cleanup
