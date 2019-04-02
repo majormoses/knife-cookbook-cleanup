@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.email       = ['me@benabrams.it']
   s.homepage    = 'https://github.com/majormoses/knife-cookbook-cleanup'
   s.summary     = 'Chef Knife plugin to remove all cookbooks except the latest'
-  s.description = 'Deletes all cookbooks from the chef server except for x versions'
+  s.description = 'Deletes a specific or all cookbooks from the chef server except for x versions'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.required_ruby_version = '>= 2.3.1'
 
-  s.add_dependency 'chef', '> 12.0'
+  s.add_dependency 'chef', '> 12.0', '< 14.0'
 
   s.add_development_dependency 'bundler', '~> 1.6'
   s.add_development_dependency 'rake'
