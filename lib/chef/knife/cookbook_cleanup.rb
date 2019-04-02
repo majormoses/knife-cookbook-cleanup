@@ -29,7 +29,7 @@ class Chef
         Chef::Knife::Bootstrap.load_deps
       end
 
-      banner 'knife cookbook cleanup'
+      banner 'knife cookbook cleanup [COOKBOOK] (options)'
 
       option :versions_to_keep,
              long: '--versions-to-keep VALUE',
@@ -44,11 +44,13 @@ class Chef
              default: false
 
       def run
+        target_cookbook = name_args[0] if name_args.length.positive?
         all_cookbooks = rest.get_rest('/cookbooks?num_versions=all')
         drop_cookbooks = {}
         keep_cookbooks = {}
         all_cookbooks.each do |cb|
           cookbook_name = cb[0]
+          next if !target_cookbook.nil? && target_cookbook != cookbook_name
           sorted_versions = cb[1]['versions'].map { |v| v['version'] }.sort { |x, y| Gem::Version.new(x) <=> Gem::Version.new(y) }
           keep_versions = sorted_versions.pop(config[:versions_to_keep])
           dropped_versions = sorted_versions
