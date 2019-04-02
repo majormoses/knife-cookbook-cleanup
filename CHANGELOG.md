@@ -5,6 +5,9 @@ This CHANGELOG follows the format located [here](https://github.com/sensu-plugin
 
 ## [Unreleased]
 
+### Added
+- allow targeting a single cookbook for cleanup, not specifying any cookbook will cleanup all cookbooks (@majormoses)
+
 ## [1.0.0] - 2018-03-06
 ### Added
 - option `--dry-run` to echo out what it would do (@majormoses)

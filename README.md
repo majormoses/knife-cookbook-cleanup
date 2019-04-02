@@ -15,10 +15,10 @@ add `knife-cookbook-cleanup` to your Gemfile, or simply
 Usage
 ---------------
 
-    
-    ```
+Both cookbook and options are not required:
+
     $ knife cookbook cleanup --help
-    knife cookbook cleanup
+    knife cookbook cleanup [COOKBOOK] (options)
     -s, --server-url URL             Chef Server URL
         --chef-zero-host HOST        Host to start chef-zero on
         --chef-zero-port PORT        Port (or port range) to start chef-zero on.  Port ranges like 1000,1010 or 8889-9999 will try all given ports until one works.
@@ -37,10 +37,9 @@ Usage
     -z, --local-mode                 Point knife commands at local repository instead of server
     -u, --user USER                  API Client Username
         --print-after                Show the data after a destructive operation
+        --profile PROFILE            The credentials profile to select
     -V, --verbose                    More verbose output. Use twice for max verbosity
     -v, --version                    Show chef version
         --versions-to-keep VALUE     Versions of cookbooks to keep (default 1)
     -y, --yes                        Say yes to all prompts for confirmation
     -h, --help                       Show this message
-
-    ```
