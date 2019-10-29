@@ -5,6 +5,9 @@ This CHANGELOG follows the format located [here](https://github.com/sensu-plugin
 
 ## [Unreleased]
 
+### Security
+- updated dependencies via dependabot (@dependabot)
+
 ### Added
 - allow targeting a single cookbook for cleanup, not specifying any cookbook will cleanup all cookbooks (@majormoses)
 
