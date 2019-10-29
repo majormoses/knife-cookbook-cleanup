@@ -5,6 +5,8 @@ This CHANGELOG follows the format located [here](https://github.com/sensu-plugin
 
 ## [Unreleased]
 
+
+## [1.1.0] - 2019-10-28
 ### Security
 - updated dependencies via dependabot (@dependabot)
 
@@ -30,6 +32,7 @@ This CHANGELOG follows the format located [here](https://github.com/sensu-plugin
 ### Added
 - functional version (@agoddard)
 
-[Unreleased]: https://github.com/majormoses/knife-cookbook-cleanup/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/majormoses/knife-cookbook-cleanup/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/majormoses/knife-cookbook-cleanup/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/majormoses/knife-cookbook-cleanup/compare/v0.1.1...1.0.0
 [0.1.1]: https://github.com/majormoses/knife-cookbook-cleanup/compare/df026a622e4962f0a1d88e93d866bf4daae02b0e...7822c8a3790c25ab2acb56b24507728c19efd7b4
