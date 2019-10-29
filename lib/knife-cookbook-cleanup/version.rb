@@ -2,7 +2,7 @@
 
 module Knife
   module CookbookCleanup
-    VERSION = '1.0.0'
+    VERSION = '1.1.0'
     MAJOR, MINOR, TINY = VERSION.split('.')
   end
 end
